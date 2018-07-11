@@ -23,13 +23,13 @@ public class SimonSays extends KeyAdapter {
 	// Complete steps 1 - 7 before you test
 	// 1. Declare a JFrame variable
 	JFrame f;
+	int points = 0;
 
 	HashMap<Integer, String> images = new HashMap<Integer, String>();
 	private int imageIndex;
 	private int tries = 0;
 	private boolean simonSays = false;
 	static Date timeAtStart = new Date();
-	Date timeAtEnd = new Date();
 
 	private void makeAlbum() {
 		// 2. Add the four images that match keyboard keys like this:
@@ -47,7 +47,7 @@ public class SimonSays extends KeyAdapter {
 
 	public void keyPressed(KeyEvent e) {
 		// 15. Make a points variable to track the score.
-		int points = 0;
+
 		// 16. If the keyCode matches the imageIndex and "Simon says"
 		if (e.getKeyCode() == imageIndex && simonSays == true) {
 
@@ -74,7 +74,7 @@ public class SimonSays extends KeyAdapter {
 			// 26. Tell the user their score
 			JOptionPane.showMessageDialog(null, "Your score is " + points);
 			// 27. Exit the program
-
+			Date timeAtEnd = new Date();
 			System.out.println((timeAtEnd.getTime() - timeAtStart.getTime()) / 1000);
 			System.exit(0);
 		}
