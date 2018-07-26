@@ -1,20 +1,32 @@
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.Random;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class WhackAMole implements ActionListener {
 	JFrame f;
 	JPanel p;
-
+	int whacks = 0;
+	Date timeatstart = new Date();
+	
 	public static void main(String[] args) {
 		Random r = new Random();
 		WhackAMole wam = new WhackAMole();
 		wam.drawButtons(r.nextInt(24));
 
+	}
+	private void endGame(Date timeAtStart, int molesWhacked) {
+	     Date timeAtEnd = new Date();
+	     JOptionPane.showMessageDialog(null, "Your whack rate is "
+	          + ((timeAtEnd.getTime() - timeAtStart.getTime()) / 1000.00 / molesWhacked)
+	          + " moles per second.");
 	}
 
 	void speak(String words) {
@@ -49,7 +61,18 @@ public class WhackAMole implements ActionListener {
 		// TODO Auto-generated method stub
 		JButton b = (JButton) e.getSource();
 		if (b.getText() != "mole!") {
-			speak("You missed!");
+			speak("You missed");
+			
+		}
+		else {
+			Random r = new Random();
+			f.dispose();
+			drawButtons(r.nextInt(24));
+			whacks++;
+			if(whacks > 9) {
+				f.dispose();
+				endGame(timeatstart, whacks);
+			}
 		}
 	}
 }
